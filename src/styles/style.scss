@@ -1,0 +1,13 @@
+@use 'colors' as *;
+
+$alert-border-radius: 0;
+
+$btn-border-radius: 0;
+$btn-border-radius-lg: 0;
+
+$form-select-focus-box-shadow: none;
+
+$input-border-radius: 0;
+$input-focus-box-shadow: none;
+
+@import '../node_modules//bootstrap/scss//bootstrap.scss';
