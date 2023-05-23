@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-	baseURL: 'http://localhost:3500/api',
+	baseURL: 'https://language-school-backend-dtq0tkstx-abieniek03.vercel.app/api',
 });
 
 export default instance;
