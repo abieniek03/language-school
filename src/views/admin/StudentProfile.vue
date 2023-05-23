@@ -6,14 +6,14 @@ import Heading from '../../components/elements/Heading.vue';
 import ProfileData from '../../components/dashboard/ProfileData.vue';
 import AcceptModal from '../../components/modals/AcceptModal.vue';
 
-import convertGroupName from '../../utils/convertGroupName';
+import convertLanguageID from '../../utils/convertLanguageID';
 import { navigateToLogin } from '../../utils/navigateAdmin';
 
 import axios from '../../axiosInstance';
 
 const id = ref<string>(window.location.href.split('/')[4]);
 const fullName = ref<string>('');
-const group = ref<string>();
+const language = ref<string>();
 const profileData = ref<{ label: string; value: string }[]>();
 
 const getStudentProfileData = () => {
@@ -21,7 +21,7 @@ const getStudentProfileData = () => {
 		.get(`/student-profile/${id.value}`)
 		.then((res) => {
 			fullName.value = `${res.data.firstName} ${res.data.lastName}`;
-			group.value = convertGroupName(Number(res.data.group));
+			language.value = convertLanguageID(Number(res.data.language));
 			profileData.value = [
 				{
 					label: 'Adres zamieszkania',
@@ -59,7 +59,8 @@ onMounted(() => {
 		<div class="border-bottom d-flex flex-column flex-md-row justify-content-between">
 			<div>
 				<Heading type="h1" :title="fullName" />
-				<p class="fw-bold ms-3 ms-lg-4 pt-2">{{ group }}</p>
+
+				<p class="fw-bold mx-3 mt-4 mt-lg-3">Język {{ language }}</p>
 			</div>
 			<div>
 				<AcceptModal label="Usuń ucznia" />

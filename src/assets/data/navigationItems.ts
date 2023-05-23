@@ -1,4 +1,4 @@
-const navigationItems: { label: string; path: string; cta?: boolean }[] = [
+const navigationItems: { label: string; path: string; cta?: boolean; click?: () => void }[] = [
 	{
 		label: 'Strona główna',
 		path: '/',
@@ -10,11 +10,6 @@ const navigationItems: { label: string; path: string; cta?: boolean }[] = [
 	{
 		label: 'Administrator',
 		path: '/administrator/logowanie',
-	},
-	{
-		label: 'Zapisz się',
-		path: '/zapisz-sie',
-		cta: true,
 	},
 ];
 

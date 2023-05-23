@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-	<main class="p-5">
+	<main class="p-5 my-2">
 		<slot />
 	</main>
 </template>

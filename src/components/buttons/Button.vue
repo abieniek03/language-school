@@ -12,7 +12,7 @@ defineProps<{ label: string; type?: string; styles?: string; path?: string }>();
 		{{ label }}
 	</a>
 
-	<button v-else type="submit" class="btn btn-primary w-100 p-3" :class="styles">
+	<button v-else class="btn btn-primary w-100 p-3" :class="styles">
 		{{ label }}
 	</button>
 </template>

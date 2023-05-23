@@ -1,6 +1,6 @@
 import { ref } from 'vue';
 import axios from '../axiosInstance';
-import convertGroupName from './convertGroupName';
+import convertGroupName from './convertLanguageID';
 
 export const id = ref<string>(window.location.href.split('/')[4]);
 export const fullName = ref<string>('');

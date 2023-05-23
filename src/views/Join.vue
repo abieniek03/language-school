@@ -13,7 +13,7 @@ import ErrorAlert from '../components/elements/ErrorAlert.vue';
 import FormSelect from '../components/formFields/FormSelect.vue';
 
 import registerStudentFormValidation from '../utils/registerStudentFormValidation';
-import groupOptions from '../assets/data/groupOptions';
+import languageOptions from '../assets/data/languageOptions';
 
 import axios from '../axiosInstance';
 import router from '../router';
@@ -21,7 +21,7 @@ import router from '../router';
 export interface IStudentData {
 	firstName: string;
 	lastName: string;
-	group: string;
+	language: string;
 	address: string;
 	postalCode: string;
 	city: string;
@@ -32,7 +32,7 @@ export interface IStudentData {
 const studentData = ref<IStudentData>({
 	firstName: '',
 	lastName: '',
-	group: '',
+	language: '',
 	address: '',
 	postalCode: '',
 	city: '',
@@ -75,12 +75,7 @@ document.title = 'Dołącz - Szkoła Języków Obcych';
 		<div class="py-1 py-lg-3">
 			<FormInput label="Imię" id="firstName" v-model="studentData.firstName" />
 			<FormInput label="Nazwisko" id="lastName" v-model="studentData.lastName" />
-			<FormSelect
-				label="Grupa wiekowa"
-				placeholder="Wybierz grupę wiekową"
-				:options="groupOptions"
-				v-model="studentData.group"
-			/>
+			<FormSelect label="Język" placeholder="Wybierz" :options="languageOptions" v-model="studentData.language" />
 			<FormInput label="Adres" id="address" v-model="studentData.address" />
 			<FormInput label="Kod pocztowy" id="postalCode" v-model="studentData.postalCode" />
 			<FormInput label="Miasto" id="city" v-model="studentData.city" />

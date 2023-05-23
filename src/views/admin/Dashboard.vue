@@ -1,71 +1,65 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watchEffect } from 'vue';
 
 import Content from '../../components/layouts/Content.vue';
+import Navbar from '../../components/elements/Navbar.vue';
 import Heading from '../../components/elements/Heading.vue';
 import Student from '../../components/dashboard/Student.vue';
 import FormInput from '../../components/formFields/FormInput.vue';
 import FormSelect from '../../components/formFields/FormSelect.vue';
 
-import groupOptions from '../../assets/data/groupOptions';
+import languageOptions from '../../assets/data/languageOptions';
 import { navigateToLogin } from '../../utils/navigateAdmin';
 
 import axios from '../../axiosInstance';
-import router from '../../router';
-import Link from '../../components/buttons/Link.vue';
 
 const students = ref();
 const searchTerm = ref<string>('');
-const groupID = ref<number | string>();
-
-const logout = () => {
-	localStorage.removeItem('login-token');
-	router.push('/administrator/logowanie');
-};
+const languageID = ref<number | string>();
 
 const getStudents = () => {
 	if (searchTerm.value === '') {
-		if (groupID.value === undefined || groupID.value === 'Wszystkie') {
+		if (languageID.value === undefined || languageID.value === 'Wszystkie') {
 			axios
 				.get('/students')
 				.then((res) => (students.value = res.data.allStudents))
 				.catch((error) => (students.value = error.response.data.communicate));
 		} else {
 			axios
-				.get(`/students-group/${groupID.value}`)
+				.get(`/students-language/${languageID.value}`)
 				.then((res) => (students.value = res.data.students))
 				.catch((error) => (students.value = error.response.data.communicate));
 		}
 	} else {
-		if (groupID.value === undefined || groupID.value === 'Wszystkie') {
+		if (languageID.value === undefined || languageID.value === 'Wszystkie') {
 			axios
 				.get(`/students-name/${searchTerm.value}`)
 				.then((res) => (students.value = res.data.students))
 				.catch((error) => (students.value = error.response.data.communicate));
 		} else {
 			axios
-				.get(`/students-name-group/${searchTerm.value}/${groupID.value}`)
+				.get(`/students-name-language/${searchTerm.value}/${languageID.value}`)
 				.then((res) => (students.value = res.data.students))
 				.catch((error) => (students.value = error.response.data.communicate));
 		}
 	}
 };
 onMounted(() => {
-	getStudents();
 	navigateToLogin();
+});
+
+watchEffect(() => {
+	getStudents();
 });
 </script>
 
 <template>
+	<Navbar />
 	<Content>
 		<div
-			class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center mb-2 pb-2 border-bottom"
+			class="d-flex flex-column flex-md-row justify-content-md-between align-items-md-center mt-4 mb-2 py-4 border-bottom"
 		>
-			<div>
-				<Heading title="Panel administratora" type="h1" />
-				<Link path="/" label="Strona główna" styles="d-inline-flex mt-2 mx-lg-3 my-2 px-2" />
-			</div>
-			<button @click="logout" class="btn btn-primary align-self-start mx-3 my-2">Wyloguj się</button>
+			<Heading title="Panel administratora" type="h1" />
 		</div>
 		<div class="py-2">
 			<p>Tutaj znajdziesz wszystkich zapisanych uczniów oraz informacje o nich.</p>
@@ -73,7 +67,12 @@ onMounted(() => {
 				<FormInput label="Wyszukaj..." id="search" styles="search" v-model="searchTerm" />
 			</div>
 			<div>
-				<FormSelect label="Wyszukaj po grupie" placeholder="Wszystkie" :options="groupOptions" v-model="groupID" />
+				<FormSelect
+					label="Wyszukaj po grupie"
+					placeholder="Wszystkie"
+					:options="languageOptions"
+					v-model="languageID"
+				/>
 			</div>
 
 			<div>
@@ -82,7 +81,7 @@ onMounted(() => {
 					v-else
 					v-for="el of students"
 					:name="`${el.firstName} ${el.lastName}`"
-					:group="el.group"
+					:language="el.language"
 					:id="el._id"
 				/>
 			</div>

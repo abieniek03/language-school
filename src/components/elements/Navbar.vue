@@ -1,8 +1,19 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
+
+import Button from '../buttons/Button.vue';
+
 import navigationItems from '../../assets/data/navigationItems';
 
 const logoLink = window.location.href.split('/')[3] === '';
+const loginedUser = ref<boolean>(localStorage.getItem('login-token') ? true : false);
+console.log();
+
+const logout = () => {
+	localStorage.removeItem('login-token');
+	window.location.reload();
+};
 </script>
 
 <template>
@@ -24,13 +35,13 @@ const logoLink = window.location.href.split('/')[3] === '';
 			>
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse d-lg-flex justify-content-lg-end" id="navbarNav">
+			<div class="collapse navbar-collapse d-lg-flex justify-content-lg-end align-items-center" id="navbarNav">
 				<ul class="navbar-nav mt-3 mt-lg-0">
 					<li v-for="item of navigationItems" class="nav-item text-center py-1 p-lg-0 mx-lg-2">
-						<router-link :to="item.path" class="nav-link" :class="item.cta && 'bg-primary text-white'">{{
-							item.label
-						}}</router-link>
+						<router-link :to="item.path" class="nav-link">{{ item.label }}</router-link>
 					</li>
+					<Button v-if="!loginedUser" label="Zapisz się" type="link" path="/zapisz-sie" />
+					<Button @click="logout" v-else label="Wyloguj się" type="link" />
 				</ul>
 			</div>
 		</div>

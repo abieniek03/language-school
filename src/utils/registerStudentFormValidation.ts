@@ -1,6 +1,6 @@
-import { IFormData } from '../views/Join.vue';
+import { IStudentData } from '../views/Join.vue';
 
-const registerStudentFormValidation = (formData: IFormData) => {
+const registerStudentFormValidation = (formData: IStudentData) => {
 	if (
 		formData.firstName.length < 3 ||
 		formData.lastName.length < 3 ||
