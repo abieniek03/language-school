@@ -15,7 +15,6 @@ const routes = [
 	{ path: '/', component: Home },
 	{ path: '/kontakt', component: Contact },
 	{ path: '/zapisz-sie', component: Join },
-	{ path: '/zapiszsie', component: Join },
 	{ path: '/powitanie', component: WelcomeNewStudent },
 	{ path: '/administrator/logowanie', component: AdminLoginPanel },
 	{ path: '/administrator/rejestracja', component: AdminRegisterPanel },
