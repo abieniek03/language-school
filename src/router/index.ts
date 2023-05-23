@@ -15,13 +15,14 @@ const routes = [
 	{ path: '/', component: Home },
 	{ path: '/kontakt', component: Contact },
 	{ path: '/zapisz-sie', component: Join },
+	{ path: '/zapiszsie', component: Join },
 	{ path: '/powitanie', component: WelcomeNewStudent },
 	{ path: '/administrator/logowanie', component: AdminLoginPanel },
 	{ path: '/administrator/rejestracja', component: AdminRegisterPanel },
 	{ path: '/uczniowie', component: AdminDashboard },
 	{ path: '/uczen/:id', component: StudentProfile },
 	{ path: '/nieznaleziono', component: NotFound },
-	{ path: '/:catchAll(.*)', redirect: '/nieznaleziono' },
+	{ path: '/:pathMatch(.*)*', redirect: '/nieznaleziono' },
 ];
 
 const router = createRouter({
