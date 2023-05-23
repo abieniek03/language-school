@@ -8,7 +8,6 @@ import navigationItems from '../../assets/data/navigationItems';
 
 const logoLink = window.location.href.split('/')[3] === '';
 const loginedUser = ref<boolean>(localStorage.getItem('login-token') ? true : false);
-console.log();
 
 const logout = () => {
 	localStorage.removeItem('login-token');
