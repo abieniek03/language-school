@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Heading from '../Elements/Heading.vue';
+import Heading from '../elements/Heading.vue';
 import SectionLayout from '../layouts/SectionLayout.vue';
 </script>
 
