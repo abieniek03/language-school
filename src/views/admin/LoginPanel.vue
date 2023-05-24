@@ -59,7 +59,7 @@ onMounted(() => {
 			<ErrorAlert :communicate="info" />
 			<FormInput label="Login" id="login" v-model="adminData.login" />
 			<FormInput label="Hasło" id="password" type="password" v-model="adminData.password" />
-			<Button @click="handleLogin" v-if="!loading" label="Zaloguj się" />
+			<Button @click="handleLogin" v-if="!loading" label="Zaloguj się" styles="w-100 p-3" />
 			<LoadingButton v-else label="Logowanie" />
 			<Link path="/administrator/rejestracja" label="Nie masz jeszcze konta? Zarejestruj się." />
 		</div>

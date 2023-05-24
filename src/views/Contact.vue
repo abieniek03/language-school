@@ -49,7 +49,7 @@ document.title = 'Kontakt - Szkoła Języków Obcych';
 					></textarea>
 					<label for="floatingTextarea2">Wiadomość</label>
 				</div>
-				<Button label="Wyślij" type="form" />
+				<Button label="Wyślij" type="form" styles="w-100 p-3" />
 			</div>
 		</div>
 	</div>

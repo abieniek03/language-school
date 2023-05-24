@@ -9,6 +9,7 @@ import AdminLoginPanel from '../views/admin/LoginPanel.vue';
 import AdminRegisterPanel from '../views/admin/RegisterPanel.vue';
 import AdminDashboard from '../views/admin/Dashboard.vue';
 import StudentProfile from '../views/admin/StudentProfile.vue';
+
 import NotFound from '../views/NotFound.vue';
 
 const routes = [

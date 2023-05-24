@@ -69,7 +69,7 @@ onMounted(() => {
 			<FormInput label="Login" id="login" v-model="adminData.login" />
 			<FormInput label="Hasło" id="password" type="password" v-model="adminData.password" />
 			<FormInput label="Powtórz hasło" id="passwordRepeat" type="password" v-model="adminData.passwordRepeat" />
-			<Button @click="handleRegister" v-if="!loading" label="Zarejestruj się" />
+			<Button @click="handleRegister" v-if="!loading" label="Zarejestruj się" styles="w-100 p-3" />
 			<LoadingButton v-else label="Rejestracja" />
 			<Link path="/administrator/logowanie" label="Masz już konto? Zaloguj się." />
 		</div>

@@ -40,7 +40,7 @@ const logout = () => {
 						<router-link :to="item.path" class="nav-link">{{ item.label }}</router-link>
 					</li>
 					<Button v-if="!loginedUser" label="Zapisz się" type="link" path="/zapisz-sie" />
-					<Button @click="logout" v-else label="Wyloguj się" type="link" />
+					<Button @click="logout" v-else label="Wyloguj się" />
 				</ul>
 			</div>
 		</div>
