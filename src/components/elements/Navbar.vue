@@ -2,8 +2,6 @@
 import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 
-import Button from '../buttons/Button.vue';
-
 import navigationItems from '../../assets/data/navigationItems';
 
 const logoLink = window.location.href.split('/')[3] === '';
@@ -39,8 +37,8 @@ const logout = () => {
 					<li v-for="item of navigationItems" class="nav-item text-center py-1 p-lg-0 mx-lg-2">
 						<router-link :to="item.path" class="nav-link">{{ item.label }}</router-link>
 					</li>
-					<Button v-if="!loginedUser" label="Zapisz się" type="link" path="/zapisz-sie" />
-					<Button @click="logout" v-else label="Wyloguj się" />
+					<router-link v-if="!loginedUser" to="/zapisz-sie" class="btn btn-primary"> Zapisz się</router-link>
+					<button v-else @click="logout" class="btn btn-primary">Wyloguj się</button>
 				</ul>
 			</div>
 		</div>

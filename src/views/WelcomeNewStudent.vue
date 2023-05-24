@@ -5,7 +5,6 @@ import router from '../router';
 import Navbar from '../components/elements/Navbar.vue';
 import Header from '../components/elements/Header.vue';
 import Content from '../components/layouts/Content.vue';
-// import Heading from '../components/elements/Heading.vue';
 
 watchEffect(() => {
 	if (!sessionStorage.getItem('registered')) {

@@ -55,6 +55,7 @@ const sendRegister = () => {
 		axios
 			.post('/student-register', studentData.value)
 			.then(() => {
+				sessionStorage.setItem('registered', 'true');
 				router.push('/powitanie');
 			})
 			.catch((error) => {
