@@ -28,7 +28,9 @@ const adminData = ref<IadminData>({
 const loading = ref<boolean>(false);
 const info = ref<string>('');
 
-const handleRegister = () => {
+const handleRegister = (e: Event) => {
+	e.preventDefault();
+
 	if (adminData.value.login === '' || adminData.value.password === '' || adminData.value.passwordRepeat === '') {
 		info.value = 'Uzupełnij dane.';
 	} else {
@@ -66,11 +68,13 @@ onMounted(() => {
 			<Heading title="Zarejestruj się" />
 			<p>Stwórz swoje konto administratora.</p>
 			<ErrorAlert :communicate="info" />
-			<FormInput label="Login" id="login" v-model="adminData.login" />
-			<FormInput label="Hasło" id="password" type="password" v-model="adminData.password" />
-			<FormInput label="Powtórz hasło" id="passwordRepeat" type="password" v-model="adminData.passwordRepeat" />
-			<Button @click="handleRegister" v-if="!loading" label="Zarejestruj się" />
-			<LoadingButton v-else label="Rejestracja" />
+			<form @submit="handleRegister">
+				<FormInput label="Login" id="login" v-model="adminData.login" />
+				<FormInput label="Hasło" id="password" type="password" v-model="adminData.password" />
+				<FormInput label="Powtórz hasło" id="passwordRepeat" type="password" v-model="adminData.passwordRepeat" />
+				<Button v-if="!loading" label="Zarejestruj się" />
+				<LoadingButton v-else label="Rejestracja" />
+			</form>
 			<Link path="/administrator/logowanie" label="Masz już konto? Zaloguj się." />
 		</div>
 	</div>

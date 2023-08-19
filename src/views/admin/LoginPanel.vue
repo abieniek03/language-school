@@ -26,7 +26,9 @@ const adminData = ref<IadminData>({
 const loading = ref<boolean>(false);
 const info = ref<string>('');
 
-const handleLogin = () => {
+const handleLogin = (e: Event) => {
+	e.preventDefault();
+
 	if (adminData.value.login === '' || adminData.value.password === '') {
 		info.value = 'Uzupełnij dane.';
 	} else {
@@ -57,10 +59,12 @@ onMounted(() => {
 			<Heading title="Zaloguj się" />
 			<p>Witaj administratorze! Zaloguj się do systemu.</p>
 			<ErrorAlert :communicate="info" />
-			<FormInput label="Login" id="login" v-model="adminData.login" />
-			<FormInput label="Hasło" id="password" type="password" v-model="adminData.password" />
-			<Button @click="handleLogin" v-if="!loading" label="Zaloguj się" />
-			<LoadingButton v-else label="Logowanie" />
+			<form @submit="handleLogin">
+				<FormInput label="Login" id="login" v-model="adminData.login" />
+				<FormInput label="Hasło" id="password" type="password" v-model="adminData.password" />
+				<Button v-if="!loading" label="Zaloguj się" />
+				<LoadingButton v-else label="Logowanie" />
+			</form>
 			<Link path="/administrator/rejestracja" label="Nie masz jeszcze konta? Zarejestruj się." />
 		</div>
 	</div>

@@ -44,7 +44,9 @@ const loading = ref<boolean>(false);
 
 const info = ref<string>('');
 
-const sendRegister = () => {
+const sendRegister = (e: Event) => {
+	e.preventDefault();
+
 	registerStudentFormValidation(studentData.value);
 	loading.value = true;
 
@@ -73,7 +75,7 @@ document.title = 'Dołącz - Szkoła Języków Obcych';
 	<Header content="join" title="Dołącz do naszej szkoły" text="Zapisz się na zajęcia już teraz. Przez internet." />
 	<Content>
 		<Heading title="Zapisz się" />
-		<div class="py-1 py-lg-3">
+		<form @submit="sendRegister" class="py-1 py-lg-3">
 			<FormInput label="Imię" id="firstName" v-model="studentData.firstName" />
 			<FormInput label="Nazwisko" id="lastName" v-model="studentData.lastName" />
 			<FormSelect label="Język" placeholder="Wybierz" :options="languageOptions" v-model="studentData.language" />
@@ -82,10 +84,10 @@ document.title = 'Dołącz - Szkoła Języków Obcych';
 			<FormInput label="Miasto" id="city" v-model="studentData.city" />
 			<FormInput label="Adres mailowy" id="email" type="email" v-model="studentData.email" />
 			<FormInput label="Telefon komórkowy" id="phone" v-model="studentData.phone" />
-			<Button @click="sendRegister" v-if="!loading" label="Zapisz się" />
+			<Button v-if="!loading" label="Zapisz się" />
 			<LoadingButton v-else label="Trwa zapisywanie" />
-			<ErrorAlert :communicate="info" />
-		</div>
+		</form>
+		<ErrorAlert :communicate="info" />
 	</Content>
 
 	<Footer />
