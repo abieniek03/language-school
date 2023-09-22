@@ -12,7 +12,9 @@ import languageOptions from '../../assets/data/languageOptions';
 import { navigateToLogin } from '../../utils/navigateAdmin';
 
 import axios from '../../axiosInstance';
+import LoadingAnimation from '../../components/elements/LoadingAnimation.vue';
 
+const loading = ref<boolean>(true);
 const students = ref();
 const searchTerm = ref<string>('');
 const languageID = ref<number | string>();
@@ -51,6 +53,12 @@ onMounted(() => {
 watchEffect(() => {
 	getStudents();
 });
+
+watchEffect(() => {
+	if (students.value) {
+		loading.value = false;
+	}
+});
 </script>
 
 <template>
@@ -76,14 +84,17 @@ watchEffect(() => {
 			</div>
 
 			<div>
-				<p v-if="!students" class="text-center">Nie znaleziono żadnego ucznia.</p>
-				<Student
-					v-else
-					v-for="el of students"
-					:name="`${el.firstName} ${el.lastName}`"
-					:language="el.language"
-					:id="el._id"
-				/>
+				<LoadingAnimation v-if="loading" />
+				<div v-else>
+					<p v-if="!students" class="text-center">Nie znaleziono żadnego ucznia.</p>
+					<Student
+						v-else
+						v-for="el of students"
+						:name="`${el.firstName} ${el.lastName}`"
+						:language="el.language"
+						:id="el._id"
+					/>
+				</div>
 			</div>
 		</div>
 	</Content>

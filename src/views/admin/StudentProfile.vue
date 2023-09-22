@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue';
 
 import Content from '../../components/layouts/Content.vue';
 import Heading from '../../components/elements/Heading.vue';
+import LoadingAnimation from '../../components/elements/LoadingAnimation.vue';
 import ProfileData from '../../components/dashboard/ProfileData.vue';
 import AcceptModal from '../../components/modals/AcceptModal.vue';
 
@@ -11,6 +12,7 @@ import { navigateToLogin } from '../../utils/navigateAdmin';
 
 import axios from '../../axiosInstance';
 
+const loading = ref<boolean>(true);
 const id = ref<string>(window.location.href.split('/')[4]);
 const fullName = ref<string>('');
 const language = ref<string>();
@@ -20,6 +22,7 @@ const getStudentProfileData = () => {
 	axios
 		.get(`/student-profile/${id.value}`)
 		.then((res) => {
+			loading.value = false;
 			fullName.value = `${res.data.firstName} ${res.data.lastName}`;
 			language.value = convertLanguageID(Number(res.data.language));
 			profileData.value = [
@@ -56,7 +59,8 @@ onMounted(() => {
 
 <template>
 	<Content>
-		<div class="border-bottom d-flex flex-column flex-md-row justify-content-between">
+		<LoadingAnimation v-if="loading" />
+		<div v-else class="border-bottom d-flex flex-column flex-md-row justify-content-between">
 			<div>
 				<Heading type="h1" :title="fullName" />
 
